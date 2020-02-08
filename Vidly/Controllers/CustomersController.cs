@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 using Vidly.Models;
 using Vidly.ViewModels;
 
@@ -7,33 +10,47 @@ namespace Vidly.Controllers
 {
     public class CustomersController : Controller
     {
-        //data
-        static List<Customer> cust = new List<Customer>()
+       
+        private readonly VidlyDbContext _vidlyDbContext;
+        public CustomersController()
         {
-            new Customer{Name = "Mark shantiwell", Id = 1},
-            new Customer{Name = "Peter Msimane", Id = 2}
-        };
-        CustomerViewModel customer = new CustomerViewModel()
-        {
-            Custom = cust
-        };
-
-        // GET: Customers
-        public ActionResult Customers()
-        {
-           
-            return View(customer);
+            _vidlyDbContext = new VidlyDbContext();
         }
 
-        // GET: Customers/Details/5
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            _vidlyDbContext.Dispose();
+        }
+
+        // GET: Index
+        public ActionResult Index()
+        {
+            var customerviewmodel = new CustomerViewModel
+            {
+                Custom = _vidlyDbContext.Customers.Include(c=>c.MembershipType).ToList()
+            };
+            
+            return View(customerviewmodel);
+        }
+
+        // GET: Index/Details/5
         public ActionResult Details(int id)
         {
         
-            var custom = customer.Custom.Find(x => x.Id == id);
-            return View(custom);
+            var custom = _vidlyDbContext.Customers.FirstOrDefault(c=>c.Id==id);
+            if (custom == null) return HttpNotFound($"this id {id} you pass is not in the system");
+            return View( custom);
 
         }
 
-       
+        private List<Customer> GetCustomers()
+        {
+            return new List<Customer>()
+            {
+                new Customer{Name = "Mark shantiwell", Id = 1},
+                new Customer{Name = "Peter Msimane", Id = 2}
+            };
+        }
     }
 }

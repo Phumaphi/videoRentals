@@ -8,7 +8,7 @@
         public override void Up()
         {
             CreateTable(
-                "dbo.Customers",
+                "dbo.Index",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -30,7 +30,7 @@
         public override void Down()
         {
             DropTable("dbo.Movies");
-            DropTable("dbo.Customers");
+            DropTable("dbo.Index");
         }
     }
 }

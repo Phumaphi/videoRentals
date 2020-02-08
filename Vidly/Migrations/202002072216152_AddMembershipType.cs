@@ -18,18 +18,18 @@
                     })
                 .PrimaryKey(t => t.Id);
             
-            AddColumn("dbo.Customers", "IsSubscribedToNewsletter", c => c.Boolean(nullable: false));
-            AddColumn("dbo.Customers", "MembershipTypeId", c => c.Byte(nullable: false));
-            CreateIndex("dbo.Customers", "MembershipTypeId");
-            AddForeignKey("dbo.Customers", "MembershipTypeId", "dbo.MembershipTypes", "Id", cascadeDelete: true);
+            AddColumn("dbo.Index", "IsSubscribedToNewsletter", c => c.Boolean(nullable: false));
+            AddColumn("dbo.Index", "MembershipTypeId", c => c.Byte(nullable: false));
+            CreateIndex("dbo.Index", "MembershipTypeId");
+            AddForeignKey("dbo.Index", "MembershipTypeId", "dbo.MembershipTypes", "Id", cascadeDelete: true);
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.Customers", "MembershipTypeId", "dbo.MembershipTypes");
-            DropIndex("dbo.Customers", new[] { "MembershipTypeId" });
-            DropColumn("dbo.Customers", "MembershipTypeId");
-            DropColumn("dbo.Customers", "IsSubscribedToNewsletter");
+            DropForeignKey("dbo.Index", "MembershipTypeId", "dbo.MembershipTypes");
+            DropIndex("dbo.Index", new[] { "MembershipTypeId" });
+            DropColumn("dbo.Index", "MembershipTypeId");
+            DropColumn("dbo.Index", "IsSubscribedToNewsletter");
             DropTable("dbo.MembershipTypes");
         }
     }
