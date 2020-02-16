@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Web.Services.Description;
 using Vidly.Models;
+using Vidly.ViewModel;
 using Vidly.ViewModels;
 
 namespace Vidly.Controllers
@@ -38,7 +39,7 @@ namespace Vidly.Controllers
         public ActionResult Details(int id)
         {
         
-            var custom = _vidlyDbContext.Customers.FirstOrDefault(c=>c.Id==id);
+            var custom = _vidlyDbContext.Customers.Include(m=>m.MembershipType).FirstOrDefault(c=>c.Id==id);
             if (custom == null) return HttpNotFound($"this id {id} you pass is not in the system");
             return View( custom);
 
@@ -51,6 +52,56 @@ namespace Vidly.Controllers
                 new Customer{Name = "Mark shantiwell", Id = 1},
                 new Customer{Name = "Peter Msimane", Id = 2}
             };
+        }
+
+
+        
+        public ActionResult AddNewCustomer()
+        {
+            var newCustomerViewModel = new CustomerFormViewModel
+            {
+                MembershipTypes = _vidlyDbContext.MembershipTypes.ToList(),
+
+            };
+            return View("CustomerForm",newCustomerViewModel);
+        }
+
+
+
+
+
+
+        [HttpPost]
+        public ActionResult Save(Customer customer)
+        {
+            if (customer.Id == 0)
+            {
+                _vidlyDbContext.Customers.Add(customer);
+            }
+            else
+            {
+                var upDateCustomer = _vidlyDbContext.Customers.Single(c => c.Id == customer.Id);
+                upDateCustomer.Name = customer.Name;
+                upDateCustomer.BirthDate = customer.BirthDate;
+                upDateCustomer.MembershipTypeId = customer.MembershipTypeId;
+                upDateCustomer.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;
+            }
+            _vidlyDbContext.SaveChanges();
+
+            return RedirectToAction("Index","Customers");
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var customer = _vidlyDbContext.Customers.SingleOrDefault(c => c.Id == id);
+            if (customer == null) return HttpNotFound();
+            var viewmodel = new CustomerFormViewModel()
+            {
+                Customer = customer,
+                MembershipTypes = _vidlyDbContext.MembershipTypes.ToList()
+            };
+            
+            return View("CustomerForm", viewmodel);
         }
     }
 }

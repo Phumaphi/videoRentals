@@ -153,14 +153,48 @@
     <Compile Include="Migrations\202002081224208_ApplyAnnotationsToCustomerName.designer.cs">
       <DependentUpon>202002081224208_ApplyAnnotationsToCustomerName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202002111341012_addNameofSubscriptionType.cs" />
+    <Compile Include="Migrations\202002111341012_addNameofSubscriptionType.designer.cs">
+      <DependentUpon>202002111341012_addNameofSubscriptionType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002111700222_aName.cs" />
+    <Compile Include="Migrations\202002111700222_aName.designer.cs">
+      <DependentUpon>202002111700222_aName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002122131080_AGAADDED.cs" />
+    <Compile Include="Migrations\202002122131080_AGAADDED.designer.cs">
+      <DependentUpon>202002122131080_AGAADDED.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002140946384_AddedGenre.cs" />
+    <Compile Include="Migrations\202002140946384_AddedGenre.designer.cs">
+      <DependentUpon>202002140946384_AddedGenre.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002140957369_populateGenre.cs" />
+    <Compile Include="Migrations\202002140957369_populateGenre.designer.cs">
+      <DependentUpon>202002140957369_populateGenre.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002141027143_movieEntityUpdated.cs" />
+    <Compile Include="Migrations\202002141027143_movieEntityUpdated.designer.cs">
+      <DependentUpon>202002141027143_movieEntityUpdated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002150955157_customerupdated.cs" />
+    <Compile Include="Migrations\202002150955157_customerupdated.designer.cs">
+      <DependentUpon>202002150955157_customerupdated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002152131527_addedForeignkeyToMovie.cs" />
+    <Compile Include="Migrations\202002152131527_addedForeignkeyToMovie.designer.cs">
+      <DependentUpon>202002152131527_addedForeignkeyToMovie.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\MembershipType.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\VidlyDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\CustomerViewModel.cs" />
-    <Compile Include="ViewModel\RandomMovieViewModel.cs" />
+    <Compile Include="ViewModel\MovieViewModel.cs" />
+    <Compile Include="ViewModel\CustomerFormViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-lumen.css" />
@@ -437,10 +471,13 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Movies\Random.cshtml" />
+    <Content Include="Views\Movies\Index.cshtml" />
     <Content Include="Views\Customers\Details.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Customers\Index.cshtml" />
+    <Content Include="Views\Movies\Details.cshtml" />
+    <Content Include="Views\Customers\CustomerForm.cshtml" />
+    <Content Include="Views\Movies\MovieForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -473,6 +510,30 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202002081224208_ApplyAnnotationsToCustomerName.resx">
       <DependentUpon>202002081224208_ApplyAnnotationsToCustomerName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002111341012_addNameofSubscriptionType.resx">
+      <DependentUpon>202002111341012_addNameofSubscriptionType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002111700222_aName.resx">
+      <DependentUpon>202002111700222_aName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002122131080_AGAADDED.resx">
+      <DependentUpon>202002122131080_AGAADDED.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002140946384_AddedGenre.resx">
+      <DependentUpon>202002140946384_AddedGenre.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002140957369_populateGenre.resx">
+      <DependentUpon>202002140957369_populateGenre.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002141027143_movieEntityUpdated.resx">
+      <DependentUpon>202002141027143_movieEntityUpdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002150955157_customerupdated.resx">
+      <DependentUpon>202002150955157_customerupdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002152131527_addedForeignkeyToMovie.resx">
+      <DependentUpon>202002152131527_addedForeignkeyToMovie.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

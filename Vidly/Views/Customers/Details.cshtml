@@ -6,5 +6,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <h2>Customer Details</h2>
-<div>@Model.Name</div>
+<h2>Customer Details</h2>
+@Html.HiddenFor(m=>m.Id)
+<div class="tble"><h4>@Html.ActionLink(@Model.Name,"Edit","Movies",new{ Model.Id},null)</h4>
+    <ul>
+        <li>Membership Type: @Model.MembershipType.Name</li>
+        @{
+            var datetime = @Model.BirthDate.ToString();
+          var date = datetime.AsDateTime().ToShortDateString();
+
+            var className = date == "1/1/0001" ? "remove" : null;
+        }
+        <li id="@className">Birthdate: @date</li>
+    </ul>
+    </div>
