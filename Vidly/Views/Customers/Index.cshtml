@@ -6,7 +6,9 @@
 }
 
 <h2>Customers</h2>
-
+@Html.ActionLink("Add customer", "AddNewCustomer", "Customers",new{area=""},
+    new {@class="btn btn-primary"})
+<h1></h1>
 @if (Model.Custom.Count == 0)
 {
     <p>no customers at the moment</p>

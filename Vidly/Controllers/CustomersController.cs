@@ -55,13 +55,13 @@ namespace Vidly.Controllers
         }
 
 
-        
+        //[Route("Customers/CustomerForm")]
         public ActionResult AddNewCustomer()
         {
             var newCustomerViewModel = new CustomerFormViewModel
             {
                 MembershipTypes = _vidlyDbContext.MembershipTypes.ToList(),
-
+                Customer = new Customer()
             };
             return View("CustomerForm",newCustomerViewModel);
         }
@@ -72,8 +72,18 @@ namespace Vidly.Controllers
 
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Customer customer)
         {
+            if (!ModelState.IsValid)
+            {
+                var model = new CustomerFormViewModel()
+                {
+                    Customer = customer,
+                    MembershipTypes = _vidlyDbContext.MembershipTypes.ToList()
+                };
+                return View("CustomerForm",model);
+            }
             if (customer.Id == 0)
             {
                 _vidlyDbContext.Customers.Add(customer);
@@ -94,6 +104,7 @@ namespace Vidly.Controllers
         public ActionResult Edit(int id)
         {
             var customer = _vidlyDbContext.Customers.SingleOrDefault(c => c.Id == id);
+            customer.BirthDate.Value.ToLongDateString();
             if (customer == null) return HttpNotFound();
             var viewmodel = new CustomerFormViewModel()
             {

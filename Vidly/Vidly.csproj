@@ -185,11 +185,21 @@
     <Compile Include="Migrations\202002152131527_addedForeignkeyToMovie.designer.cs">
       <DependentUpon>202002152131527_addedForeignkeyToMovie.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202002221533370_modelsUpdated.cs" />
+    <Compile Include="Migrations\202002221533370_modelsUpdated.designer.cs">
+      <DependentUpon>202002221533370_modelsUpdated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002221547572_MoviemodelUpdated.cs" />
+    <Compile Include="Migrations\202002221547572_MoviemodelUpdated.designer.cs">
+      <DependentUpon>202002221547572_MoviemodelUpdated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\MembershipType.cs" />
+    <Compile Include="Models\Min18YearIfAMember.cs" />
     <Compile Include="Models\Movie.cs" />
+    <Compile Include="Models\ValidaDefaultDateAttribute.cs" />
     <Compile Include="Models\VidlyDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\CustomerViewModel.cs" />
@@ -534,6 +544,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202002152131527_addedForeignkeyToMovie.resx">
       <DependentUpon>202002152131527_addedForeignkeyToMovie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002221533370_modelsUpdated.resx">
+      <DependentUpon>202002221533370_modelsUpdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002221547572_MoviemodelUpdated.resx">
+      <DependentUpon>202002221547572_MoviemodelUpdated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
