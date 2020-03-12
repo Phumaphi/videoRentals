@@ -27,12 +27,12 @@ namespace Vidly.Controllers
         // GET: Index
         public ActionResult Index()
         {
-            var customerviewmodel = new CustomerViewModel
-            {
-                Custom = _vidlyDbContext.Customers.Include(c=>c.MembershipType).ToList()
-            };
+            //var customerviewmodel = new CustomerViewModel
+            //{
+            //    Customers = _vidlyDbContext.Customers.Include(c=>c.MembershipType).ToList()
+            //};
             
-            return View(customerviewmodel);
+            return View();
         }
 
         // GET: Index/Details/5

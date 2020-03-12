@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using Vidly.Models;
 
-namespace Vidly.Models
+namespace Vidly.Dtos
 {
-    public class Movie
+    public class MovieDto
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "Please enter customer's name.")]
@@ -20,10 +21,7 @@ namespace Vidly.Models
         [Range(1, 10)]
         [Required(ErrorMessage = "How many do you want?")]
         public int NumberInStock { get; set; }
-
-        [Display(Name = "Genre")]
-        public int GenreId { get; set; }    
-        public Genre Genre { get; set; }
-       
+        public int GenreId { get; set; }
+        public static DateTime DateofMovieReleased = new DateTime();
     }
 }

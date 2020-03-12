@@ -8,8 +8,8 @@ namespace Vidly.Models
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            if(validationContext.ObjectInstance is Movie movie && movie.ReleaseDate==Movie.DateofMovieReleased) 
-                return  new ValidationResult(" please type a valid date.");
+            //if(validationContext.ObjectInstance is Movie movie && movie.ReleaseDate==Movie.DateofMovieReleased) 
+            //    return  new ValidationResult(" please type a valid date.");
             return ValidationResult.Success;
         }
     }

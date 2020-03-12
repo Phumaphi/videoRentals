@@ -5,39 +5,94 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Customers</h2>
-@Html.ActionLink("Add customer", "AddNewCustomer", "Customers",new{area=""},
-    new {@class="btn btn-primary"})
-<h1></h1>
-@if (Model.Custom.Count == 0)
-{
-    <p>no customers at the moment</p>
-}
-else
-{
 
-    <table class="table table-bordered table-hover">
-        <thead>
-            <tr>
-                <th>Customer</th>
-                <th>Discount Rate</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var cust in Model.Custom)
+
+<h2>Customersers</h2>
+@Html.ActionLink("Add customerDto", "AddNewCustomer", "Customers", new { area = "" },
+    new { @class = "btn btn-primary" })
+<h1></h1>
+
+<table id="customers" class="table table-bordered table-hover ">
+    <thead>
+        <tr>
+            <th>Customerser</th>
+            <th>MemberShip Type</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @*@foreach (var cust in Model.Customers)
             {
 
                 // var id = cust.Id;
 
                 <tr>
-                    @*<td> @Html.ActionLink(@cust.Name, $"Details/{ id}", "Customers")</td>*@
+                   // <td> @Html.ActionLink(@cust.Name, $"Details/{ id}", "Customersers")</td>
                     <td>@Html.ActionLink(cust.Name, "Edit", "Customers", new { id = cust.Id }, null)</td>
                     <td>@cust.MembershipType.Name</td>
+                    <td>
+                        <button data-customer-id="@cust.Id" class="delete btn-link" >Delete </button>
+                    </td>
                 </tr>
-            }
-        </tbody>
-    </table>
-    <ul>
-    </ul>
+            }*@
+    </tbody>
+</table>
+
+@section scripts
+{
+    @*<script src="~/Content/Customer.js"> </script>*@
+
+    <script>
+        $(document).ready(function () {
+            var table = $("#customers").DataTable({
+
+                ajax: {
+                    url: "/api/customers",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "name",
+                        render: function (data, type, rowRenderedOfCustomer) {
+                            debugger;
+                            return "<a href='/customers/edit/ " +
+                                rowRenderedOfCustomer.id +
+                                "'>" +
+                                rowRenderedOfCustomer.name +
+                                "</a>";
+                        }
+                    },
+                    {
+                        data: "membershipType.name"
+                    },
+                    {
+                        data: "id",
+                        render: function (data) {
+                            return "<button class='delete btn-link' data-customer-id= " + data + ">Delete</button>";
+                        }
+
+                    }
+                ]
+            });
+            $("#customers ").on("click", ".delete",
+                function () {
+                    var button = $(this);
+                    bootbox.confirm("Are you sure you want to delete this customer?", function (result) {
+
+                        if (result) {
+                            $.ajax({
+                                url: "/api/customers/" + button.attr("data-customer-id"),
+                                method: "DELETE",
+                                success: function () {
+
+                                    table.row(button.parents("tr")).remove().draw();
+                                }
+                            });
+                        }
+                    });
+
+
+                });
+        });
+    </script>
 }
-<p>this works fine</p>
